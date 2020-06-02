@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="KGk-i7-Jjw" customClass="SurveyTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IconUnCheck" translatesAutoresizingMaskIntoConstraints="NO" id="7Qs-rh-TVx">
+                        <rect key="frame" x="10" y="5" width="30" height="30"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2S-Rg-uWM">
+                        <rect key="frame" x="45" y="5" width="260" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" tag="50" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wDf-vH-W6k">
+                        <rect key="frame" x="10" y="5" width="300" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="56W-mU-hxv"/>
+                        </connections>
+                    </textField>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVl-O4-UEu">
+                        <rect key="frame" x="10" y="5" width="300" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="sVl-O4-UEu" secondAttribute="bottom" constant="8" id="7r4-UK-lc9"/>
+                    <constraint firstItem="sVl-O4-UEu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="DPo-je-vQy"/>
+                    <constraint firstItem="sVl-O4-UEu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="M6a-aM-6Tp"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="sVl-O4-UEu" secondAttribute="trailing" constant="8" id="wAg-Xv-PKb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="sVl-O4-UEu" secondAttribute="trailing" constant="10" id="3Eg-Zm-nWM"/>
+                <constraint firstItem="sVl-O4-UEu" firstAttribute="top" secondItem="KGk-i7-Jjw" secondAttribute="top" constant="5" id="BDL-fR-9VQ"/>
+            </constraints>
+            <connections>
+                <outlet property="imgStatus" destination="7Qs-rh-TVx" id="7k3-gF-zHt"/>
+                <outlet property="lblQuestionName" destination="sVl-O4-UEu" id="eow-UU-g5b"/>
+                <outlet property="lblTitle" destination="m2S-Rg-uWM" id="VJH-B1-ndA"/>
+                <outlet property="txtName" destination="wDf-vH-W6k" id="2sf-WN-Csy"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="154"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="IconUnCheck" width="32" height="32"/>
+    </resources>
+</document>

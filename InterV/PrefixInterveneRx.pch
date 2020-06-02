@@ -1,0 +1,54 @@
+//
+//  PrefixInterV.pch
+//  InterV
+//
+//  Created by HungLe on 10/4/16.
+//  Copyright © 2016 HungLe. All rights reserved.
+//
+
+#ifndef PrefixInterV_pch
+#define PrefixInterV_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#import "CalendarViewController.h"
+#import "BioMetricsViewController.h"
+#import "ProfileViewController.h"
+#import "LoginViewController.h"
+#import "EditProfileViewController.h"
+// banner top
+#import "ALAlertBanner.h"
+// Background task manager
+#import "BackgroundTaskManager.h"
+
+// import cell
+#import "CalendarTableViewCell.h"
+#import "SideEffectTableViewCell.h"
+#import "SideEffectSelectedTableViewCell.h"
+#import "SurveyTableViewCell.h"
+#import "linkServerTableViewCell.h"
+
+#import "Define.h"
+#import "Settings.h"
+//#import "MBProgressHUD.h"
+#import "AppDelegate.h"
+#import "CustomTitleViewNAV.h"
+
+// parse data
+//#import "NSDictionary+Calendar.h"
+//#import "NSDictionary+Profile.h"
+
+// encryption data
+#import "CryptLib.h"
+
+// afnetworking
+#import "AFNetworking.h"
+#import "AFNetworkActivityIndicatorManager.h"
+#import "UIImageView+AFNetworking.h"
+#import "AFHTTPSessionManager.h"
+#import "UIActivityIndicatorView+AFNetworking.h"
+
+
+#endif /* PrefixInterV_pch */
