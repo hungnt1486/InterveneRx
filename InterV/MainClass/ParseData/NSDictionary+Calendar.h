@@ -25,4 +25,5 @@
 - (NSString *)timeValid;
 - (NSNumber*)InputType;
 - (NSNumber*)Max;
+- (NSNumber*)isNormal;
 @end

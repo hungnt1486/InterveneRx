@@ -24,7 +24,6 @@
 		0A4792161DA3E6090029356B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4792151DA3E6090029356B /* main.m */; };
 		0A4792191DA3E6090029356B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4792181DA3E6090029356B /* AppDelegate.m */; };
 		0A4792211DA3E6090029356B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A4792201DA3E6090029356B /* Assets.xcassets */; };
-		0A4792241DA3E6090029356B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A4792221DA3E6090029356B /* LaunchScreen.storyboard */; };
 		0A4792531DA3ED890029356B /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4792511DA3ED890029356B /* CalendarViewController.m */; };
 		0A4792541DA3ED890029356B /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A4792521DA3ED890029356B /* CalendarViewController.xib */; };
 		0A4792581DA3EDA50029356B /* BioMetricsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4792561DA3EDA50029356B /* BioMetricsViewController.m */; };
@@ -77,6 +76,7 @@
 		0ADE372E1DFB902D0071F2DF /* SideEffect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ADE372D1DFB902D0071F2DF /* SideEffect.xib */; };
 		0AE23BE11FE799EA00C8F580 /* CustomTitleViewNAV.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE23BE01FE799EA00C8F580 /* CustomTitleViewNAV.m */; };
 		0AE7D8BB1DBC8A2900D7E5DD /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE7D8BA1DBC8A2900D7E5DD /* Settings.m */; };
+		415BFB922486B48F00EECEE4 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BFB912486B48F00EECEE4 /* Launch Screen.storyboard */; };
 		415FD776247D7FE700488B86 /* libCreativeHealthSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 415FD775247D7FE700488B86 /* libCreativeHealthSDK.a */; };
 		5032F47A206C876100ED36D4 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5032F478206C876100ED36D4 /* BackgroundTaskManager.m */; };
 		5032F47D206C8BC600ED36D4 /* LocalNotificationTrackingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5032F47C206C8BC600ED36D4 /* LocalNotificationTrackingModel.m */; };
@@ -114,7 +114,6 @@
 		0A4792171DA3E6090029356B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0A4792181DA3E6090029356B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0A4792201DA3E6090029356B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0A4792231DA3E6090029356B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A4792251DA3E6090029356B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A4792501DA3ED890029356B /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		0A4792511DA3ED890029356B /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
@@ -208,6 +207,7 @@
 		0AE23BE01FE799EA00C8F580 /* CustomTitleViewNAV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTitleViewNAV.m; sourceTree = "<group>"; };
 		0AE7D8B91DBC8A2900D7E5DD /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		0AE7D8BA1DBC8A2900D7E5DD /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		415BFB912486B48F00EECEE4 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		415FD775247D7FE700488B86 /* libCreativeHealthSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCreativeHealthSDK.a; sourceTree = "<group>"; };
 		5032F478206C876100ED36D4 /* BackgroundTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTaskManager.m; sourceTree = "<group>"; };
 		5032F479206C876100ED36D4 /* BackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 				0A4792171DA3E6090029356B /* AppDelegate.h */,
 				0A4792181DA3E6090029356B /* AppDelegate.m */,
 				0A4792201DA3E6090029356B /* Assets.xcassets */,
-				0A4792221DA3E6090029356B /* LaunchScreen.storyboard */,
+				415BFB912486B48F00EECEE4 /* Launch Screen.storyboard */,
 				0A4792251DA3E6090029356B /* Info.plist */,
 				0A47924A1DA3ECF90029356B /* MainClass */,
 				0A47922B1DA3E6850029356B /* Libs */,
@@ -555,10 +555,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A5B64EE204D30CD005A5B10 /* bannerNotify.png in Resources */,
-				0A4792241DA3E6090029356B /* LaunchScreen.storyboard in Resources */,
 				0A5B64ED204D30CD005A5B10 /* bannerFailure@2x.png in Resources */,
 				0A789AAE1DEC241200D92C4F /* SideEffectTableViewCell.xib in Resources */,
 				0A4792591DA3EDA50029356B /* BioMetricsViewController.xib in Resources */,
+				415BFB922486B48F00EECEE4 /* Launch Screen.storyboard in Resources */,
 				0A40EAF71DD2099C00D5DE84 /* crc.data in Resources */,
 				0AB114DD1E126F5000F4181A /* test.plist in Resources */,
 				0A5B64EF204D30CD005A5B10 /* bannerNotify@2x.png in Resources */,
@@ -640,17 +640,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		0A4792221DA3E6090029356B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0A4792231DA3E6090029356B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0A4792261DA3E6090029356B /* Debug */ = {
@@ -756,12 +745,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.4;
+				CURRENT_PROJECT_VERSION = 1.5;
 				DEVELOPMENT_TEAM = 6H7KC2N5RC;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = InterV/PrefixInterveneRx.pch;
 				INFOPLIST_FILE = InterV/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -784,12 +773,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.4;
+				CURRENT_PROJECT_VERSION = 1.5;
 				DEVELOPMENT_TEAM = 6H7KC2N5RC;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = InterV/PrefixInterveneRx.pch;
 				INFOPLIST_FILE = InterV/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

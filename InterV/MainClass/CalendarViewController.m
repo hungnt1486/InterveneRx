@@ -1371,7 +1371,7 @@ static CalendarViewController *_instance;
                     if ([[dictTemp Status] compare:[NSNumber numberWithInteger:1]] == NSOrderedSame) {
                         cell.imgMissed.hidden = YES;
                         cell.imgStatus.hidden = NO;
-                        [cell.imgStatus setImage:[UIImage imageNamed:@"IconCheck"]];
+                        [cell.imgStatus setImage:[[dictTemp isNormal] intValue] == -1 ? [UIImage imageNamed:@"IconCheckRed"] : [UIImage imageNamed:@"IconCheck"]];
                         cell.btnTakeMeasurement.hidden = YES;
                         [cell.btnInputResult setTitle:[dictTemp Value] forState:UIControlStateNormal];
                         cell.btnInputResult.userInteractionEnabled = NO;
@@ -1406,7 +1406,7 @@ static CalendarViewController *_instance;
                         cell.btnTakeMeasurement.hidden = YES;
                         cell.imgMissed.hidden = YES;
                         cell.imgStatus.hidden = NO;
-                        [cell.imgStatus setImage:[UIImage imageNamed:@"IconCheck"]];
+                        [cell.imgStatus setImage:[[dictTemp isNormal] intValue] == -1 ? [UIImage imageNamed:@"IconCheckRed"] : [UIImage imageNamed:@"IconCheck"]];
                         break;
                     case 2:
                         cell.btnInputResult.hidden = NO;
@@ -1450,7 +1450,7 @@ static CalendarViewController *_instance;
                             // done
                             cell.imgMissed.hidden = YES;
                             cell.imgStatus.hidden = NO;
-                            [cell.imgStatus setImage:[UIImage imageNamed:@"IconCheck"]];
+                            [cell.imgStatus setImage:[[dictTemp isNormal] intValue] == -1 ? [UIImage imageNamed:@"IconCheckRed"] : [UIImage imageNamed:@"IconCheck"]];
                             cell.btnTakeMeasurement.hidden = YES;
                             [cell.btnInputResult setTitle:[dictTemp Value] forState:UIControlStateNormal];
                             cell.btnInputResult.userInteractionEnabled = NO;
@@ -1506,7 +1506,7 @@ static CalendarViewController *_instance;
                         cell.btnTakeMeasurement.hidden = YES;
                         cell.imgMissed.hidden = YES;
                         cell.imgStatus.hidden = NO;
-                        [cell.imgStatus setImage:[UIImage imageNamed:@"IconCheck"]];
+                        [cell.imgStatus setImage:[[dictTemp isNormal] intValue] == -1 ? [UIImage imageNamed:@"IconCheckRed"] : [UIImage imageNamed:@"IconCheck"]];
                         break;
                     case 2:
                         cell.btnInputResult.hidden = NO;

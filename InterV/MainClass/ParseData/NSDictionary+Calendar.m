@@ -82,5 +82,10 @@
     NSNumber *number = @([str intValue]);
     return number;
 }
+- (NSNumber*)isNormal{
+    NSString *str = self[@"isNormal"];
+    NSNumber *number = @([str intValue]);
+    return number;
+}
 // end moi them
 @end
