@@ -28,13 +28,13 @@
 		<true/>
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>bluetooth use</string>
+	<string>Intervenerx uses Bluetooth to connect a new blood pressure monitor and connect to an electronic scale</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>bluetooth use</string>
+	<string>Intervenerx uses Bluetooth to connect a new blood pressure monitor and connect to an electronic scale</string>
 	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) camera use</string>
+	<string>$(PRODUCT_NAME) needs access to your camera to take photos. When user need to update or change avatar</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) photo use</string>
+	<string>$(PRODUCT_NAME) needs access to your camera to take photos. When user need to update or change avatar</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
