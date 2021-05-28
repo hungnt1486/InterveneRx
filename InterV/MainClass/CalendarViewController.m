@@ -1417,7 +1417,7 @@ static CalendarViewController *_instance;
                         break;
                     case 4:
                         // miss
-                        cell.btnInputResult.hidden = YES;
+                        cell.btnInputResult.hidden = NO;
                         cell.btnTakeMeasurement.hidden = YES;
                         cell.imgStatus.hidden = YES;
                         cell.imgMissed.hidden = NO;
@@ -1463,7 +1463,7 @@ static CalendarViewController *_instance;
                             break;
                         case 4:
                             // miss
-                            cell.btnInputResult.hidden = YES;
+                            cell.btnInputResult.hidden = NO;
                             cell.btnTakeMeasurement.hidden = YES;
                             cell.imgStatus.hidden = YES;
                             cell.imgMissed.hidden = NO;
@@ -1518,7 +1518,7 @@ static CalendarViewController *_instance;
                         break;
                     case 4:
                         // miss
-                        cell.btnInputResult.hidden = YES;
+                        cell.btnInputResult.hidden = NO;
                         cell.btnTakeMeasurement.hidden = YES;
                         cell.imgStatus.hidden = YES;
                         cell.imgMissed.hidden = NO;
