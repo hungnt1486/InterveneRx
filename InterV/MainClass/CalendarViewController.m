@@ -689,7 +689,7 @@ static CalendarViewController *_instance;
                                                @"TimeLogId":[NSString stringWithFormat:@"%@", [dictTemp TimeLogId]],
                                                @"calendarTypeId":[NSString stringWithFormat:@"%@", [dictTemp PatientCalendarTypeId]],
                                                @"protocoltype":@"1",
-                                               @"datetime":[format stringFromDate:dateNow],
+                                               @"datetime":strDate,//[format stringFromDate:dateNow],
                                                @"isbaseline":[dictTemp isBaseline],// == 0 ? @"false" : @"true",
                                                @"isoverride":@"false"
                                                };
@@ -715,7 +715,7 @@ static CalendarViewController *_instance;
                                            @"TimeLogId":[NSString stringWithFormat:@"%@", [dictTemp TimeLogId]],
                                            @"calendarTypeId":[NSString stringWithFormat:@"%@", [dictTemp PatientCalendarTypeId]],
                                            @"protocoltype":@"1",
-                                           @"datetime":[format stringFromDate:dateNow],
+                                           @"datetime":strDate,//[format stringFromDate:dateNow],
                                            @"isbaseline":[dictTemp isBaseline],// == 0 ? @"false" : @"true",
                                            @"isoverride":@"false"
                                            };
@@ -834,7 +834,7 @@ static CalendarViewController *_instance;
                                @"TimeLogId":[NSString stringWithFormat:@"%@", [dictTemp TimeLogId]],
                                @"calendarTypeId":[NSString stringWithFormat:@"%@", [dictTemp PatientCalendarTypeId]],
                                @"protocoltype":@"1",
-                               @"datetime":[format stringFromDate:dateNow],
+                               @"datetime":strDate,//[format stringFromDate:dateNow],
                                @"isbaseline":@"false",
                                @"isoverride":@"false"
                                };
@@ -1927,7 +1927,7 @@ static CalendarViewController *_instance;
                                    @"TimeLogId":[NSString stringWithFormat:@"%@", [dictTemp TimeLogId]],
                                    @"calendarTypeId":[NSString stringWithFormat:@"%@", [dictTemp PatientCalendarTypeId]],
                                    @"protocoltype":@"1",
-                                   @"datetime":[format stringFromDate:dateNow],
+                                   @"datetime":strDate,//[format stringFromDate:dateNow],
                                    @"isbaseline":[dictTemp isBaseline],
                                    @"isoverride":@"false"
                                    };
@@ -2594,7 +2594,7 @@ static CalendarViewController *_instance;
                                            @"TimeLogId":[NSString stringWithFormat:@"%@", [dictTemp TimeLogId]],
                                            @"calendarTypeId":[NSString stringWithFormat:@"%@", [dictTemp PatientCalendarTypeId]],
                                            @"protocoltype":@"1",
-                                           @"datetime":[format stringFromDate:dateNow],
+                                           @"datetime":strDate,//[format stringFromDate:dateNow],
                                            @"isbaseline":[dictTemp isBaseline],// == 0 ? @"false" : @"true",
                                            @"isoverride":@"false"
                                            };
@@ -2756,7 +2756,7 @@ static CalendarViewController *_instance;
                                        @"TimeLogId":[NSString stringWithFormat:@"%@", [dictTemp TimeLogId]],
                                        @"calendarTypeId":[NSString stringWithFormat:@"%@", [dictTemp PatientCalendarTypeId]],
                                        @"protocoltype":@"1",
-                                       @"datetime":[format stringFromDate:dateNow],
+                                       @"datetime":strDate,//[format stringFromDate:dateNow],
                                        @"isbaseline":[dictTemp isBaseline],// == 0 ? @"false" : @"true",
                                        @"isoverride":@"false"
                                        };
@@ -2834,7 +2834,7 @@ static CalendarViewController *_instance;
                                            @"TimeLogId":[NSString stringWithFormat:@"%@", [dictTemp TimeLogId]],
                                            @"calendarTypeId":[NSString stringWithFormat:@"%@", [dictTemp PatientCalendarTypeId]],
                                            @"protocoltype":@"1",
-                                           @"datetime":[format stringFromDate:dateNow],
+                                           @"datetime":strDate,//[format stringFromDate:dateNow],
                                            @"isbaseline":[dictTemp isBaseline],// == 0 ? @"false" : @"true",
                                            @"isoverride":@"false"
                                            };
