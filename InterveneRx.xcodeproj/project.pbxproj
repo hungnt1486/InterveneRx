@@ -516,7 +516,7 @@
 				TargetAttributes = {
 					0A4792101DA3E6090029356B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 6H7KC2N5RC;
+						DevelopmentTeam = 574TZ756K4;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -744,8 +744,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.6;
-				DEVELOPMENT_TEAM = 6H7KC2N5RC;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 574TZ756K4;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = InterV/PrefixInterveneRx.pch;
 				INFOPLIST_FILE = InterV/Info.plist;
@@ -755,7 +755,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/InterV/Libs/creativeSDK",
 				);
-				MARKETING_VERSION = 2.1.19;
+				MARKETING_VERSION = 2.1.20;
 				PRODUCT_BUNDLE_IDENTIFIER = com.intervrx.interv;
 				PRODUCT_NAME = InterveneRx;
 				PROVISIONING_PROFILE = "";
@@ -772,8 +772,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.6;
-				DEVELOPMENT_TEAM = 6H7KC2N5RC;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 574TZ756K4;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = InterV/PrefixInterveneRx.pch;
 				INFOPLIST_FILE = InterV/Info.plist;
@@ -783,7 +783,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/InterV/Libs/creativeSDK",
 				);
-				MARKETING_VERSION = 2.1.19;
+				MARKETING_VERSION = 2.1.20;
 				PRODUCT_BUNDLE_IDENTIFIER = com.intervrx.interv;
 				PRODUCT_NAME = InterveneRx;
 				PROVISIONING_PROFILE = "";
