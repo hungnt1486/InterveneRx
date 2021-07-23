@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <UserNotifications/UserNotifications.h>
 
 @interface AppDelegate (){
     BOOL checkStateApp;
@@ -46,12 +47,25 @@ static AppDelegate *_instance;
     }
     
     // local notification
-    UIUserNotificationSettings *notificationSetting = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge| UIUserNotificationTypeSound categories:nil];
-    [application registerUserNotificationSettings:notificationSetting];
-
-
-
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+//    UIUserNotificationSettings *notificationSetting = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge| UIUserNotificationTypeSound categories:nil];
+//    [application registerUserNotificationSettings:notificationSetting];
+//
+//
+//
+//    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    
+    [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:UNAuthorizationOptionSound + UNAuthorizationOptionAlert completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Something went wrong");
+        }
+    }];
+//    self.center = [UNUserNotificationCenter currentNotificationCenter];
+//    UNAuthorizationOptions options = UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UNAuthorizationOptionBadge;
+//    [self.center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
+//        if (error != nil) {
+//            NSLog(@"Something went wrong");
+//        }
+//    }];
     // end local notification
     
     return YES;

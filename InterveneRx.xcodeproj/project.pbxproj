@@ -755,7 +755,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/InterV/Libs/creativeSDK",
 				);
-				MARKETING_VERSION = 2.1.20;
+				MARKETING_VERSION = 2.1.22;
 				PRODUCT_BUNDLE_IDENTIFIER = com.intervrx.interv;
 				PRODUCT_NAME = InterveneRx;
 				PROVISIONING_PROFILE = "";
@@ -783,7 +783,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/InterV/Libs/creativeSDK",
 				);
-				MARKETING_VERSION = 2.1.20;
+				MARKETING_VERSION = 2.1.22;
 				PRODUCT_BUNDLE_IDENTIFIER = com.intervrx.interv;
 				PRODUCT_NAME = InterveneRx;
 				PROVISIONING_PROFILE = "";

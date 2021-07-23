@@ -6,6 +6,7 @@
 //  Copyright © 2016 HungLe. All rights reserved.
 //
 
+#import <UserNotifications/UserNotifications.h>
 #import "CalendarViewController.h"
 #import "NSDictionary+Calendar.h"
 
@@ -190,6 +191,11 @@ static CalendarViewController *_instance;
     // end BLE
 }
 
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    [Settings setBottomLB:_lblTitleSurveyTouch];
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     if ([self.calendarView isDescendantOfView:self.view]) {
         [[AppDelegate shareInstance] showProgressHub];
@@ -292,12 +298,37 @@ static CalendarViewController *_instance;
                             [[NSUserDefaults standardUserDefaults] synchronize];
 
                             NSArray *arrTime = [[dictTemp Time] componentsSeparatedByString:@":"];
-                            NSInteger hour = [[arrTime objectAtIndex:0] integerValue] - [[dictTemp Earlytimehour] integerValue];
-                            NSString *timer = [NSString stringWithFormat:@"%ld:%@", (long)hour, [arrTime objectAtIndex:1]];
+                            NSArray *arrMinutes = [[arrTime objectAtIndex:1] componentsSeparatedByString:@" "];
+                            NSInteger hour = 0;
+                            NSString *timer = [[NSString alloc] init];
+                            // for case [dictTemp Time] - Earlytimehour > 0
+                            if ([[dictTemp Time] integerValue] - [[dictTemp Earlytimehour] integerValue] > 0) {
+                                hour = [[arrTime objectAtIndex:0] integerValue] - [[dictTemp Earlytimehour] integerValue];
+                                timer = [NSString stringWithFormat:@"%ld:%@", (long)hour, [arrTime objectAtIndex:1]];
+                            }else {
+                                // + 12 vì nó là PM
+                                
+                                hour = [[arrTime objectAtIndex:0] integerValue] - [[dictTemp Earlytimehour] integerValue] + 12;
+                                if (hour == 12) {
+                                    timer = [NSString stringWithFormat:@"%ld:%@", (long)hour, [arrTime objectAtIndex:1]];
+                                }else{
+                                    timer = [NSString stringWithFormat:@"%ld:%@ AM", (long)hour, [arrMinutes objectAtIndex:0]];
+                                }
+                            }
+                            
                             [self scheduleLocalNotification:timer alertBody:[dictTemp DisplayName]];
                             // schedule local notification for duration time (key time valid)
                             // event time - early time + time valid - 1
-                            [self scheduleLocalNotification:[NSString stringWithFormat:@"%d:%@", hour + [[dictTemp timeValid] integerValue] - 1, [arrTime objectAtIndex:1]] alertBody:[dictTemp DisplayName]];
+//                            long timeValid = hour + [[dictTemp timeValid] integerValue] - 1;
+//                            NSString *strTypeTime = @"";
+//                            if (timeValid <= 12) {
+//                                strTypeTime = [arrTime objectAtIndex:1];
+//                            }else if (timeValid > 12 && [[arrTime objectAtIndex:1] rangeOfString:@"AM"].location != NSNotFound){
+//                                strTypeTime = [NSString stringWithFormat:@"%@ %@", [arrMinutes objectAtIndex:0], @"PM"];
+//                            }else if (timeValid > 12 && [[arrTime objectAtIndex:1] rangeOfString:@"PM"].location != NSNotFound){
+//                                strTypeTime = [NSString stringWithFormat:@"%@ %@", [arrMinutes objectAtIndex:0], @"AM"];
+//                            }
+//                            [self scheduleLocalNotification:[NSString stringWithFormat:@"%ld:%@", timeValid > 12 ? timeValid - 12 : timeValid, strTypeTime] alertBody:[dictTemp DisplayName]];
                         }
                     }
                 }
@@ -1124,23 +1155,47 @@ static CalendarViewController *_instance;
 - (void)scheduleLocalNotification:(NSString *)strTime alertBody : (NSString *)alertBody{
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"MM/dd/yyyy hh:mm a"];
-    NSDate *date = [[NSDate alloc] init];
+    NSDate *date = [NSDate new];
     date = [format dateFromString:[NSString stringWithFormat:@"%@ %@", strDate, strTime]];
     NSLog(@"date schedule = %@", date);
 //    NSLog(@"strTime = %@", strTime);
 //    NSLog(@"date local notification = %@", date);
 //    NSLog(@"date local notification111 = %@", [format stringFromDate:date]);
     // Schedule the notification
-    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-    localNotification.fireDate = date;
-    localNotification.alertBody = alertBody;
-    localNotification.soundName = @"alarm_of_old_clock.mp3";
-    localNotification.userInfo = @{@"info": [NSString stringWithFormat:@"%@%@", strTime, alertBody]};
-//    localNotification.soundName = UILocalNotificationDefaultSoundName
-//    localNotification.alertAction = @"Show me the item";
-//    localNotification.timeZone = [NSTimeZone defaultTimeZone];
-    localNotification.timeZone = [NSTimeZone systemTimeZone];
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+//    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+//    localNotification.fireDate = date;
+//    localNotification.alertBody = alertBody;
+//    localNotification.soundName = @"alarm_of_old_clock.mp3";
+//    localNotification.userInfo = @{@"info": [NSString stringWithFormat:@"%@%@", strTime, alertBody]};
+////    localNotification.soundName = UILocalNotificationDefaultSoundName
+////    localNotification.alertAction = @"Show me the item";
+////    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+//    localNotification.timeZone = [NSTimeZone systemTimeZone];
+//    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
+    
+    UNMutableNotificationContent *content = [UNMutableNotificationContent new];
+//    content.title = @"Don't forget";
+    content.body = alertBody;
+    content.sound = [UNNotificationSound soundNamed:@"alarm_of_old_clock.mp3"];
+    content.userInfo = @{@"info": [NSString stringWithFormat:@"%@%@", strTime, alertBody]};
+
+
+    // trigger wake up local notification
+    if (date != nil) {
+        NSDateComponents *dateComponents = [[NSCalendar currentCalendar]
+                                            components:NSCalendarUnitYear +
+                                            NSCalendarUnitMonth + NSCalendarUnitDay +
+                                            NSCalendarUnitHour + NSCalendarUnitMinute +
+                                            NSCalendarUnitSecond fromDate:date];
+        UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:dateComponents repeats:NO];
+
+        // trigger schedule
+        NSString *identifier = @"InteVrx";
+        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:identifier content:content trigger:trigger];
+        
+        [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:nil];
+    }
 
 //    UIApplication *app = [UIApplication sharedApplication];
 //    NSArray *eventArray = [app scheduledLocalNotifications];
@@ -1313,8 +1368,23 @@ static CalendarViewController *_instance;
                         [[NSUserDefaults standardUserDefaults] synchronize];
                         
                         NSArray *arrTime = [[dictTemp Time] componentsSeparatedByString:@":"];
-                        NSInteger hour = [[arrTime objectAtIndex:0] integerValue] - [[dictTemp Earlytimehour] integerValue];
-                        NSString *timer = [NSString stringWithFormat:@"%ld:%@", (long)hour, [arrTime objectAtIndex:1]];
+                        NSArray *arrMinutes = [[arrTime objectAtIndex:1] componentsSeparatedByString:@" "];
+                        NSInteger hour = 0;
+                        NSString *timer = [[NSString alloc] init];
+                        // for case [dictTemp Time] - Earlytimehour > 0
+                        if ([[dictTemp Time] integerValue] - [[dictTemp Earlytimehour] integerValue] > 0) {
+                            hour = [[arrTime objectAtIndex:0] integerValue] - [[dictTemp Earlytimehour] integerValue];
+                            timer = [NSString stringWithFormat:@"%ld:%@", (long)hour, [arrTime objectAtIndex:1]];
+                        }else {
+                            // + 12 vì nó là PM
+                            
+                            hour = [[arrTime objectAtIndex:0] integerValue] - [[dictTemp Earlytimehour] integerValue] + 12;
+                            if (hour == 12) {
+                                timer = [NSString stringWithFormat:@"%ld:%@", (long)hour, [arrTime objectAtIndex:1]];
+                            }else{
+                                timer = [NSString stringWithFormat:@"%ld:%@ AM", (long)hour, [arrMinutes objectAtIndex:0]];
+                            }
+                        }
                         [self scheduleLocalNotification:timer alertBody:[dictTemp DisplayName]];
                     }
                     if ([[dictTemp Status] integerValue] == 5) {
@@ -1388,8 +1458,23 @@ static CalendarViewController *_instance;
                         [[NSUserDefaults standardUserDefaults] synchronize];
 
                         NSArray *arrTime = [[dictTemp Time] componentsSeparatedByString:@":"];
-                        NSInteger hour = [[arrTime objectAtIndex:0] integerValue] - [[dictTemp Earlytimehour] integerValue];
-                        NSString *timer = [NSString stringWithFormat:@"%ld:%@", (long)hour, [arrTime objectAtIndex:1]];
+                        NSArray *arrMinutes = [[arrTime objectAtIndex:1] componentsSeparatedByString:@" "];
+                        NSInteger hour = 0;
+                        NSString *timer = [[NSString alloc] init];
+                        // for case [dictTemp Time] - Earlytimehour > 0
+                        if ([[dictTemp Time] integerValue] - [[dictTemp Earlytimehour] integerValue] > 0) {
+                            hour = [[arrTime objectAtIndex:0] integerValue] - [[dictTemp Earlytimehour] integerValue];
+                            timer = [NSString stringWithFormat:@"%ld:%@", (long)hour, [arrTime objectAtIndex:1]];
+                        }else {
+                            // + 12 vì nó là PM
+                            
+                            hour = [[arrTime objectAtIndex:0] integerValue] - [[dictTemp Earlytimehour] integerValue] + 12;
+                            if (hour == 12) {
+                                timer = [NSString stringWithFormat:@"%ld:%@", (long)hour, [arrTime objectAtIndex:1]];
+                            }else{
+                                timer = [NSString stringWithFormat:@"%ld:%@ AM", (long)hour, [arrMinutes objectAtIndex:0]];
+                            }
+                        }
                         [self scheduleLocalNotification:timer alertBody:[dictTemp DisplayName]];
                     }
                     if ([[dictTemp Status] integerValue] == 5) {
@@ -1487,8 +1572,23 @@ static CalendarViewController *_instance;
                         [[NSUserDefaults standardUserDefaults] synchronize];
 
                         NSArray *arrTime = [[dictTemp Time] componentsSeparatedByString:@":"];
-                        NSInteger hour = [[arrTime objectAtIndex:0] integerValue] - [[dictTemp Earlytimehour] integerValue];
-                        NSString *timer = [NSString stringWithFormat:@"%ld:%@", (long)hour, [arrTime objectAtIndex:1]];
+                        NSArray *arrMinutes = [[arrTime objectAtIndex:1] componentsSeparatedByString:@" "];
+                        NSInteger hour = 0;
+                        NSString *timer = [[NSString alloc] init];
+                        // for case [dictTemp Time] - Earlytimehour > 0
+                        if ([[dictTemp Time] integerValue] - [[dictTemp Earlytimehour] integerValue] > 0) {
+                            hour = [[arrTime objectAtIndex:0] integerValue] - [[dictTemp Earlytimehour] integerValue];
+                            timer = [NSString stringWithFormat:@"%ld:%@", (long)hour, [arrTime objectAtIndex:1]];
+                        }else {
+                            // + 12 vì nó là PM
+                            
+                            hour = [[arrTime objectAtIndex:0] integerValue] - [[dictTemp Earlytimehour] integerValue] + 12;
+                            if (hour == 12) {
+                                timer = [NSString stringWithFormat:@"%ld:%@", (long)hour, [arrTime objectAtIndex:1]];
+                            }else{
+                                timer = [NSString stringWithFormat:@"%ld:%@ AM", (long)hour, [arrMinutes objectAtIndex:0]];
+                            }
+                        }
                         [self scheduleLocalNotification:timer alertBody:[dictTemp DisplayName]];
                     }
                     if ([[dictTemp Status] integerValue] == 5) {
@@ -2098,7 +2198,7 @@ static CalendarViewController *_instance;
 }
 
 - (void)alertWarning{
-    UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"Warning!" message:@"Please Answer the question." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"Warning!" message:@"Please answer all the questions." preferredStyle:UIAlertControllerStyleAlert];
     [alertControl addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [alertControl dismissViewControllerAnimated:YES completion:nil];
     }]];
@@ -2181,53 +2281,7 @@ static CalendarViewController *_instance;
                     bCheckActive = false;
                 }
             }
-            
-            
-//            if ([[d valueForKey:@"Status"] isEqualToString:@"Active"]) {
-//                NSArray *arr = [NSArray arrayWithObjects:[d valueForKey:@"Id"], nil];
-//                
-//                [dTemp setValue:arr forKey:@"Answer"];
-//                [dTemp setValue:[d valueForKey:@"AnswerName"] forKey:@"OtherAnswer"];
-////                [dTemp setValue:@"abcde" forKey:@"OtherAnswer"];
-//                [arrTemp addObject:dTemp];
-//            }else{
-//                NSDictionary *dNo = [arraySurveyParse objectAtIndex:i+1];
-//                if ([[dNo valueForKey:@"Status"] isEqualToString:@"Active"]) {
-//                    NSArray *arr = [NSArray arrayWithObjects:[dNo valueForKey:@"Id"], nil];
-//                    [dTemp setValue:arr forKey:@"Answer"];
-//                    [dTemp setValue:[dNo valueForKey:@"AnswerName"] forKey:@"OtherAnswer"];
-////                    [dTemp setValue:@"abcde" forKey:@"OtherAnswer"];
-//                    [arrTemp addObject:dTemp];
-//                }else{
-//                    [self performSelectorOnMainThread:@selector(alertWarning) withObject:nil waitUntilDone:NO];
-//                    bCheckAll = false;
-//                    break;
-//                }
-//            }
         }
-//        else if ([[d valueForKey:@"AnswerName"] isEqualToString:@"Yes"]){
-//            if ([[d valueForKey:@"Status"] isEqualToString:@"Active"]) {
-//                NSArray *arr = [NSArray arrayWithObjects:[d valueForKey:@"Id"], nil];
-//                
-//                [dTemp setValue:arr forKey:@"Answer"];
-//                [dTemp setValue:[d valueForKey:@"AnswerName"] forKey:@"OtherAnswer"];
-//                //                [dTemp setValue:@"abcde" forKey:@"OtherAnswer"];
-//                [arrTemp addObject:dTemp];
-//            }else{
-//                NSDictionary *dNo = [arraySurveyParse objectAtIndex:i+1];
-//                if ([[dNo valueForKey:@"Status"] isEqualToString:@"Active"]) {
-//                    NSArray *arr = [NSArray arrayWithObjects:[dNo valueForKey:@"Id"], nil];
-//                    [dTemp setValue:arr forKey:@"Answer"];
-//                    [dTemp setValue:[dNo valueForKey:@"AnswerName"] forKey:@"OtherAnswer"];
-//                    //                    [dTemp setValue:@"abcde" forKey:@"OtherAnswer"];
-//                    [arrTemp addObject:dTemp];
-//                }else{
-//                    [self performSelectorOnMainThread:@selector(alertWarning) withObject:nil waitUntilDone:NO];
-//                    bCheckAll = false;
-//                    break;
-//                }
-//            }
-//        }
         else if ([[d objectForKey:@"QuestionType"] isEqualToString:@"2"]){//([[d valueForKey:@"AnswerName"] isEqualToString:@"text"] || [[d valueForKey:@"AnswerName"] isEqualToString:@"textbox"]){
             NSLog(@"dictInputTextSurvey = %@", dictInputTextSurvey);
 //            UITextField *txt = (UITextField *)[_tableViewSurvey viewWithTag:50 + [[d valueForKey:@"Id"] integerValue]];
@@ -2240,6 +2294,13 @@ static CalendarViewController *_instance;
             NSString *str123 = [dictInputTextSurvey valueForKey:[NSString stringWithFormat:@"key%d", 50 + [[d valueForKey:@"Id"] integerValue]]];
 //            NSData *data123 = [str123 dataUsingEncoding:NSUTF8StringEncoding];
 //            str123 = [[NSString alloc] initWithData:data123 encoding:NSUTF8StringEncoding];
+            if (str123.length == 0) {
+                [self performSelectorOnMainThread:@selector(alertWarning) withObject:nil waitUntilDone:NO];
+                bCheckAll = false;
+                break;
+            }else{
+                bCheckActive = false;
+            }
             
             [dTemp setValue:str123 forKey:@"OtherAnswer"];
             
@@ -2367,9 +2428,6 @@ static CalendarViewController *_instance;
 
                 NSDictionary *dTemp = [arrayCalendar objectAtIndex:_btnSendSurvey.tag];
                 if ([[dTemp valueForKey:@"Id"] isEqualToString:[[NSUserDefaults standardUserDefaults] valueForKey:kEventIDSurvey]]){
-//                    [[NSUserDefaults standardUserDefaults] setObject:arraySurveyParse forKey:kReminderSurvey];
-//                    [[NSUserDefaults standardUserDefaults] setObject:dictInputTextSurvey forKey:kDictInputTextSurvey];
-//                    [[NSUserDefaults standardUserDefaults] setObject:arraySurvey forKey:kArraySurvey];
                     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kEventIDSurvey];
                     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kReminderSurvey];
                     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kDictInputTextSurvey];
